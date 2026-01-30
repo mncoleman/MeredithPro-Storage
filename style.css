@@ -23,6 +23,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
 }
 
 /* Background Effects */
@@ -65,6 +66,13 @@ body {
     bottom: -10%;
     left: -10%;
     animation: move 25s infinite alternate-reverse;
+}
+
+@media (max-width: 768px) {
+    .blob {
+        width: 80vw;
+        height: 80vw;
+    }
 }
 
 @keyframes move {
@@ -143,6 +151,44 @@ nav {
 
 .nav-links a:hover {
     color: var(--text-primary);
+}
+
+.logo {
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.menu-toggle .bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--text-primary);
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
 }
 
 /* Page Styles */
@@ -515,21 +561,48 @@ nav {
 
 @media (max-width: 768px) {
     .glass-header {
-        padding: 1rem;
+        padding: 1rem 1.5rem;
     }
 
     nav {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+    }
+
+    .menu-toggle {
+        display: flex;
     }
 
     .nav-links {
-        gap: 1.5rem;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: rgba(12, 14, 18, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.5rem;
+        color: var(--text-primary);
     }
 
     main {
-        padding: 0 1rem;
+        padding: 0 1.5rem;
     }
 
     .section-title {
@@ -543,7 +616,9 @@ nav {
     }
 
     .hero h1 {
-        font-size: 3rem;
+        font-size: 2.8rem;
+        line-height: 1.1;
+        overflow-wrap: break-word;
     }
 
     .hero p {
@@ -602,11 +677,17 @@ nav {
     .plans-grid {
         grid-template-columns: 1fr;
     }
+
+    .discontinued-badge {
+        right: -30px;
+        top: 15px;
+        font-size: 0.6rem;
+    }
 }
 
 @media (max-width: 480px) {
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
     .page-hero h1 {
@@ -614,11 +695,11 @@ nav {
     }
 
     .nav-links {
-        gap: 1rem;
+        gap: 2.5rem;
     }
 
     .nav-links a {
-        font-size: 0.85rem;
+        font-size: 1.25rem;
     }
 
     .btn {
@@ -630,5 +711,9 @@ nav {
         display: flex;
         flex-direction: column;
         gap: 1rem;
+    }
+
+    .plan-card {
+        padding: 2rem 1.5rem;
     }
 }
